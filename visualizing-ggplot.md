@@ -15,7 +15,7 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Produce scatter plots and boxplots using `ggplot2`.
+- Produce scatter plots and bar charts using `ggplot2`.
 - Represent data variables with plot components.
 - Modify the scales of plot components.
 - Iteratively build and modify `ggplot2` plots by adding layers.
@@ -319,7 +319,7 @@ ggplot(data = complete_old, mapping = aes(x = weight, y = hindfoot_length, color
 
 One nice thing about `ggplot` and the `tidyverse` in general is that groups of functions that do similar things are given similar names. Any function that modifies a `ggplot` scale starts with `scale_`, making it easier to search for the right function.
 
-## Boxplot
+## Barchart
 
 Let's try making a different type of plot altogether. We'll start off with our same basic building blocks using `ggplot()` and `aes()`.
 
@@ -330,37 +330,37 @@ ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length))
 
 <img src="fig/visualizing-ggplot-rendered-blank-boxplot-1.png" width="600" height="600" style="display: block; margin: auto;" />
 
-This time, let's try making a boxplot, which will have `plot_type` on the x axis and `hindfoot_length` on the y axis. We can do this by adding `geom_boxplot()` to our `ggplot()`:
+This time, let's try making a bar chart, which are common in ecology. We will have `plot_type` on the x axis and `hindfoot_length` on the y axis. We can do this by adding `geom_bar()` to our `ggplot()`:
 
 
 ``` r
 ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +
-  geom_boxplot()
+  geom_bar(stat = "summary", fun = "mean")
 ```
 
 ``` warning
 Warning: Removed 2733 rows containing non-finite outside the scale range
-(`stat_boxplot()`).
+(`stat_summary()`).
 ```
 
 <img src="fig/visualizing-ggplot-rendered-boxplot-1.png" width="600" height="600" style="display: block; margin: auto;" />
 
-Just as we colored the points before, we can color our boxplot by `plot_type` as well:
+Just as we colored the points before, we can color our bar chart by `plot_type` as well:
 
 
 ``` r
 ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length, color = plot_type)) +
-  geom_boxplot()
+  geom_bar(stat = "summary", fun = "mean")
 ```
 
 <img src="fig/visualizing-ggplot-rendered-boxplot-color-1.png" width="600" height="600" style="display: block; margin: auto;" />
 
-It looks like `color` has only affected the outlines of the boxplot, not the rectangular portions. This is because the `color` only impacts 1-dimensional parts of a `ggplot`: points and lines. To change the color of 2-dimensional parts of a plot, we use `fill`:
+It looks like `color` has only affected the outlines of the bars, not the rectangular portions. This is because the `color` only impacts 1-dimensional parts of a `ggplot`: points and lines. To change the color of 2-dimensional parts of a plot, we use `fill`:
 
 
 ``` r
 ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length, fill = plot_type)) +
-  geom_boxplot()
+  geom_bar(stat = "summary", fun = "mean")
 ```
 
 <img src="fig/visualizing-ggplot-rendered-boxplot-fill-1.png" width="600" height="600" style="display: block; margin: auto;" />
@@ -374,7 +374,7 @@ We use the `scale_x_discrete()` function because we have a discrete axis, and we
 
 ``` r
 ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length, fill = plot_type)) +
-  geom_boxplot() +
+  geom_bar(stat = "summary", fun = "mean") +
   scale_x_discrete(labels = label_wrap_gen(width = 10))
 ```
 
@@ -384,14 +384,14 @@ ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length, fi
 
 ## Adding geoms
 
-One of the most powerful aspects of **`ggplot`** is the way we can add components to a plot in successive layers. While boxplots can be very useful for summarizing data, it is often helpful to show the raw data as well. With **`ggplot`**, we can easily add another `geom_` to our plot to show the raw data. 
+One of the most powerful aspects of **`ggplot`** is the way we can add components to a plot in successive layers. While bar charts can be very useful for summarizing data, it is often helpful to show the raw data as well. With **`ggplot`**, we can easily add another `geom_` to our plot to show the raw data. 
 
 Let's add `geom_point()` to visualize the raw data. We will modify the `alpha` argument to help with overplotting.
 
 
 ``` r
 ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +
-  geom_boxplot() +
+  geom_bar(stat = "summary", fun = "mean") +
   geom_point(alpha = 0.2)
 ```
 
@@ -402,76 +402,79 @@ Uh oh... all our points for a given `x` axis category fall exactly on a line, wh
 
 ``` r
 ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +
-  geom_boxplot() +
+  geom_bar(stat = "summary", fun = "mean") +
   geom_jitter(alpha = 0.2)
 ```
 
 <img src="fig/visualizing-ggplot-rendered-boxplot-jitter-1.png" width="600" height="600" style="display: block; margin: auto;" />
 
-You may have noticed that some of our data points are now appearing on our plot twice: the outliers are plotted as black points from `geom_boxplot()`, but they are also plotted with `geom_jitter()`. Since we don't want to represent these data multiple times in the same form (points), we can stop `geom_boxplot()` from plotting them. We do this by setting the `outlier.shape` argument to `NA`, which means the outliers don't have a shape to be plotted.
-
-
-``` r
-ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +
-  geom_boxplot(outlier.shape = NA) +
-  geom_jitter(alpha = 0.2)
-```
-
-<img src="fig/visualizing-ggplot-rendered-boxplot-outliers-1.png" width="600" height="600" style="display: block; margin: auto;" />
-
 Just as before, we can map `plot_type` to `color` by putting it inside `aes()`.
 
 
 ``` r
-ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length, color = plot_type)) +
-  geom_boxplot(outlier.shape = NA) +
+ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length, fill = plot_type)) +
+  geom_bar(stat = "summary", fun = "mean") +
   geom_jitter(alpha = 0.2)
 ```
 
 <img src="fig/visualizing-ggplot-rendered-global-color-1.png" width="600" height="600" style="display: block; margin: auto;" />
 
-Notice that both the color of the points and the color of the boxplot lines changed. Any time we specify an `aes()` mapping inside our initial `ggplot()` function, that mapping will apply to all our `geom`s.
+Notice that both the color of the points and the color of the bar plot lines changed. Any time we specify an `aes()` mapping inside our initial `ggplot()` function, that mapping will apply to all our `geom`s.
 
 If we want to limit the mapping to a single `geom`, we can put the mapping into the specific `geom_` function, like this:
 
 
 ``` r
 ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +
-  geom_boxplot(outlier.shape = NA) +
-  geom_jitter(aes(color = plot_type), alpha = 0.2)
+  geom_bar(stat = "summary", fun = "mean") +
+  geom_jitter(mapping = aes(color = plot_type), alpha = 0.2)
 ```
 
 <img src="fig/visualizing-ggplot-rendered-geom-color-1.png" width="600" height="600" style="display: block; margin: auto;" />
 
-Now our points are colored according to `plot_type`, but the boxplots are all the same color. One thing you might notice is that even with `alpha = 0.2`, the points obscure parts of the boxplot. This is because the `geom_point()` layer comes after the `geom_boxplot()` layer, which means the points are plotted on top of the boxes. To put the boxplots on top, we switch the order of the layers:
+Now our points are colored according to `plot_type`, but the bars are all the same color. One thing you might notice is that even with `alpha = 0.2`, the points obscure parts of the bars This is because the `geom_point()` layer comes after the `geom_bar()` layer, which means the points are plotted on top of the bars To put the bar plot on top, we switch the order of the layers:
 
 
 ``` r
 ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +
   geom_jitter(aes(color = plot_type), alpha = 0.2) +
-  geom_boxplot(outlier.shape = NA)
+  geom_bar(stat = "summary", fun = "mean")
 ```
 
 <img src="fig/visualizing-ggplot-rendered-reverse-layers-1.png" width="600" height="600" style="display: block; margin: auto;" />
 
-Now we have the opposite problem! The white `fill` of the boxplots completely obscures some of the points. To address this problem, we can remove the `fill` from the boxplots altogether, leaving only the black lines. To do this, we set `fill` to `NA`:
+Now we have the opposite problem! The white `fill` of the bar plot completely obscures some of the points. To address this problem, we can remove the `fill` from the bar plot altogether, leaving only the black lines. To do this, we set `fill` to `NA`:
 
 
 ``` r
 ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +
   geom_jitter(aes(color = plot_type), alpha = 0.2) +
-  geom_boxplot(outlier.shape = NA, fill = NA)
+  geom_bar(stat = "summary", fun = "mean", color = "black", fill = NA)
 ```
 
 <img src="fig/visualizing-ggplot-rendered-fill-na-1.png" width="600" height="600" style="display: block; margin: auto;" />
 
-Now we can see all the raw data and our boxplots on top.
+Now we can see all the raw data and our bar charts on top.
+
+## Error Bars
+
+Bar charts do not show the spread of data as well as box plots or violin plots. We can illustrate our spread of data by including error bars, which can be calculated using different statistical analyses. Here, we will illustrate error bars using a mean standard error, which shows precision of the mean estimate. You can also calculate error bars using the standard deviation.
+
+
+``` r
+ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length, fill = plot_type)) +
+  geom_bar(stat = "summary", fun = "mean") +
+  stat_summary(fun.data = "mean_sdl", geom = "errorbar", width = 0.2, color = "blue") +
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = 0.2) 
+```
+
+<img src="fig/visualizing-ggplot-rendered-error-bars-1.png" width="600" height="600" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
 ## Challenge 2: Change `geom`s
 
-Violin plots are similar to boxplots- try making one using `plot_type` and `hindfoot_length` as the x and y variables. Remember that all geom functions start with `geom_`, followed by the type of geom.
+Violin plots show the distribution shape of your data- try making one using `plot_type` and `hindfoot_length` as the x and y variables. Remember that all geom functions start with `geom_`, followed by the type of geom.
 
 This might also be a place to test your search engine skills. It is often useful to search for `R package_name stuff you want to search`. So for this example we might search for `R ggplot2 violin plot`.
 
@@ -481,10 +484,9 @@ This might also be a place to test your search engine skills. It is often useful
 ``` r
 ggplot(data = complete_old, 
        mapping = aes(x = plot_type, 
-                     y = hindfoot_length,
-                     color = plot_type)) +
+                     y = hindfoot_length)) +
   geom_jitter(alpha = 0.2) +
-  geom_violin(fill = "white")
+  geom_violin()
 ```
 
 <img src="fig/visualizing-ggplot-rendered-violin-challenge-answer-1.png" width="600" height="600" style="display: block; margin: auto;" />
@@ -501,8 +503,8 @@ ggplot(data = complete_old,
        mapping = aes(x = plot_type, 
                      y = hindfoot_length,
                      color = plot_type)) +
-  geom_jitter(alpha = 0.2) +
-  geom_violin(fill = "white")
+  geom_jitter(alpha = 0.2, mapping = aes(fill = plot_type)) +
+  geom_violin( fill = "white", mapping = aes(color = plot_type))
 ```
 
 <img src="fig/visualizing-ggplot-rendered-violin-challenge-answer-2-1.png" width="600" height="600" style="display: block; margin: auto;" />
@@ -522,14 +524,14 @@ We will create an object called `myplot`. If you run the name of the `ggplot2` o
 ``` r
 myplot <- ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +
   geom_jitter(aes(color = plot_type), alpha = 0.2) +
-  geom_boxplot(outlier.shape = NA, fill = NA)
+  geom_bar(stat = "summary", fun = "mean", color = "black", fill = NA)
 
 myplot
 ```
 
 ``` warning
 Warning: Removed 2733 rows containing non-finite outside the scale range
-(`stat_boxplot()`).
+(`stat_summary()`).
 ```
 
 ``` warning
@@ -603,9 +605,8 @@ Because there are so many possible arguments to the `theme()` function, it can s
 
 ::::::::::::::::::::::::::::: callout
 
-You may have noticed that we have used 3 different approaches to getting rid of something in `ggplot`: 
+You may have noticed that we have used 2 different approaches to getting rid of something in `ggplot`: 
 
-- `outlier.shape = NA` to remove the outliers from our boxplot
 - `panel.grid.major.x = element_blank()` to remove the x grid lines
 - `legend.position = "none"` to remove our legend
 
