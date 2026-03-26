@@ -134,7 +134,7 @@ We use the `ggplot()` function to create a plot. In order to tell it what data t
 ggplot(data = complete_old)
 ```
 
-<img src="fig/visualizing-ggplot-rendered-bare-plot-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-bare-plot-1.png" alt="Blank plot area after calling ggplot without specifying variables to plot" width="600" height="600" style="display: block; margin: auto;" />
 
 We get a blank plot because we haven't told `ggplot()` which variables we want to correspond to parts of the plot. We can specify the "mapping" of variables to plot elements, such as x/y coordinates, size, or shape, by using the `aes()` function. We'll also add a comment, which is any line starting with a `#`. It's a good idea to use comments to organize your code or clarify what you are doing.
 
@@ -144,7 +144,7 @@ We get a blank plot because we haven't told `ggplot()` which variables we want t
 ggplot(data = complete_old, mapping = aes(x = weight, y = hindfoot_length))
 ```
 
-<img src="fig/visualizing-ggplot-rendered-plot-with-axes-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-plot-with-axes-1.png" alt="Blank plot area, now variable names in the x and y axes, but not showing a plot as we haven't specified how we want the data to be displayed, what type of plot to do" width="600" height="600" style="display: block; margin: auto;" />
 
 Now we've got a plot with x and y axes corresponding to variables from `complete_old`. However, we haven't specified how we want the data to be displayed. We do this using `geom_` functions, which specify the type of `geom`etry we want, such as points, lines, or bars. We can add a `geom_point()` layer to our plot by using the `+` sign. We indent onto a new line to make it easier to read, and we have to **end** the first line with the `+` sign.
 
@@ -159,7 +159,7 @@ Warning: Removed 3081 rows containing missing values or values outside the scale
 (`geom_point()`).
 ```
 
-<img src="fig/visualizing-ggplot-rendered-scatter-plot-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-scatter-plot-1.png" alt="Scatter plot of the weight and hindfoot_lenght variables, showing a positive relationship between the two" width="600" height="600" style="display: block; margin: auto;" />
 
 You may notice a warning that missing values were removed. If a variable necessary to make the plot is missing from a given row of data (in this case, `hindfoot_length` or `weight`), it can't be plotted. `ggplot2` just uses a warning message to let us know that some rows couldn't be plotted.
 
@@ -194,7 +194,7 @@ ggplot(data = complete_old, mapping = aes(x = weight, y = hindfoot_length)) +
   geom_point(alpha = 0.2)
 ```
 
-<img src="fig/visualizing-ggplot-rendered-change-alpha-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-change-alpha-1.png" alt="Same box plot between weight and hindfoot_lenght variables as the previous one, but now with transparency" width="600" height="600" style="display: block; margin: auto;" />
 
 We can also change the color of the points:
 
@@ -204,7 +204,7 @@ ggplot(data = complete_old, mapping = aes(x = weight, y = hindfoot_length)) +
   geom_point(alpha = 0.2, color = "blue")
 ```
 
-<img src="fig/visualizing-ggplot-rendered-change-color-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-change-color-1.png" alt="Same box plot between weight and hindfoot_lenght variables as the previous one, but now changing the color of points to blue" width="600" height="600" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::::: callout
 
@@ -252,7 +252,7 @@ ggplot(data = complete_old, mapping = aes(x = weight, y = hindfoot_length, color
   geom_point(alpha = 0.2)
 ```
 
-<img src="fig/visualizing-ggplot-rendered-color-plot-type-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-color-plot-type-1.png" alt="Box plot between weight (in the x-axis) and hindfoot_lenght (in the y-axis) variables as before, but now changing the color of points according to plot_type" width="600" height="600" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
@@ -271,7 +271,7 @@ ggplot(data = complete_old,
   geom_point(alpha = 0.2)
 ```
 
-<img src="fig/visualizing-ggplot-rendered-modify-points-challenge-answer-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-modify-points-challenge-answer-1.png" alt="Box plot between weight (in the x-axis) and hindfoot_lenght (in the y-axis) variables as before, but now changing the shape of points according to sex" width="600" height="600" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::
 
@@ -286,7 +286,7 @@ ggplot(data = complete_old,
   geom_point(alpha = 0.2)
 ```
 
-<img src="fig/visualizing-ggplot-rendered-modify-color-challenge-answer-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-modify-color-challenge-answer-1.png" alt="Box plot between weight (in the x-axis) and hindfoot_lenght (in the y-axis) variables as before, but now changing the color of points according to year" width="600" height="600" style="display: block; margin: auto;" />
  
 - For Part 2, the color scale is different compared to using `color = plot_type` because `plot_type` and `year` are different variable types. `plot_type` is a categorical variable, so `ggplot2` defaults to use a **discrete** color scale, whereas `year` is a numeric variable, so `ggplot2` uses a **continuous** color scale.
 
@@ -304,7 +304,7 @@ ggplot(data = complete_old, mapping = aes(x = weight, y = hindfoot_length, color
   scale_color_viridis_d()
 ```
 
-<img src="fig/visualizing-ggplot-rendered-scale-viridis-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-scale-viridis-1.png" alt="Box plot between weight (in the x-axis) and hindfoot_lenght (in the y-axis) with color of points according to plot_type, but now changing the color scale" width="600" height="600" style="display: block; margin: auto;" />
 
 Scales don't just apply to colors- any plot component that you put inside `aes()` can be modified with `scale_` functions. Just as we modified the scale used to map `plot_type` to `color`, we can modify the way that `weight` is mapped to the `x` axis by using the `scale_x_log10()` function:
 
@@ -315,7 +315,7 @@ ggplot(data = complete_old, mapping = aes(x = weight, y = hindfoot_length, color
   scale_x_log10()
 ```
 
-<img src="fig/visualizing-ggplot-rendered-scale-log-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-scale-log-1.png" alt="Box plot between weight (in the x-axis) and hindfoot_lenght (in the y-axis) with color of points according to plot_type, but now modifying the scale of the x-axis to be in log 10 scale" width="600" height="600" style="display: block; margin: auto;" />
 
 One nice thing about `ggplot` and the `tidyverse` in general is that groups of functions that do similar things are given similar names. Any function that modifies a `ggplot` scale starts with `scale_`, making it easier to search for the right function.
 
@@ -328,7 +328,7 @@ Let's try making a different type of plot altogether. We'll start off with our s
 ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length))
 ```
 
-<img src="fig/visualizing-ggplot-rendered-blank-boxplot-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-blank-boxplot-1.png" alt="Empty plot area, using the plot_type (x-axis) and hindfoot_length (y-axis) variables" width="600" height="600" style="display: block; margin: auto;" />
 
 This time, let's try making a bar chart, which are common in ecology. We will have `plot_type` on the x axis and `hindfoot_length` on the y axis. We can do this by adding `geom_bar()` to our `ggplot()`:
 
@@ -343,7 +343,7 @@ Warning: Removed 2733 rows containing non-finite outside the scale range
 (`stat_summary()`).
 ```
 
-<img src="fig/visualizing-ggplot-rendered-boxplot-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-boxplot-1.png" alt="Bar chart using the plot_type (x-axis) and hindfoot_length (y-axis) variables, showing the average hindfoot_length by plot_type" width="600" height="600" style="display: block; margin: auto;" />
 
 Just as we colored the points before, we can color our bar chart by `plot_type` as well:
 
@@ -353,7 +353,7 @@ ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length, co
   geom_bar(stat = "summary", fun = "mean")
 ```
 
-<img src="fig/visualizing-ggplot-rendered-boxplot-color-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-boxplot-color-1.png" alt="Same bar chart between plot_type (x-axis) and hindfoot_length (y-axis) variables as before, but now with a colored border line for each plot_type bar" width="600" height="600" style="display: block; margin: auto;" />
 
 It looks like `color` has only affected the outlines of the bars, not the rectangular portions. This is because the `color` only impacts 1-dimensional parts of a `ggplot`: points and lines. To change the color of 2-dimensional parts of a plot, we use `fill`:
 
@@ -363,7 +363,7 @@ ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length, fi
   geom_bar(stat = "summary", fun = "mean")
 ```
 
-<img src="fig/visualizing-ggplot-rendered-boxplot-fill-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-boxplot-fill-1.png" alt="Same bar chart between plot_type (x-axis) and hindfoot_length (y-axis) variables as before, but now with each plot_type bar in a different color" width="600" height="600" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::::: callout
 
@@ -378,7 +378,7 @@ ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length, fi
   scale_x_discrete(labels = label_wrap_gen(width = 10))
 ```
 
-<img src="fig/visualizing-ggplot-rendered-boxplot-label-wrap-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-boxplot-label-wrap-1.png" alt="Same bar chart between plot_type (x-axis) and hindfoot_length (y-axis) variables as before, but with wrapped labels for the x-axis, improving readability" width="600" height="600" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::::::
 
@@ -395,7 +395,7 @@ ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +
   geom_point(alpha = 0.2)
 ```
 
-<img src="fig/visualizing-ggplot-rendered-boxplot-points-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-boxplot-points-1.png" alt="Same bar chart between plot_type (x-axis) and hindfoot_length (y-axis) variables as before, but adding a scatter plot layer on top. However, it is not as useful as all points are cluttered for each plot_type in the x-axis." width="600" height="600" style="display: block; margin: auto;" />
 
 Uh oh... all our points for a given `x` axis category fall exactly on a line, which isn't very useful. We can shift to using `geom_jitter()`, which will add points with a bit of random noise added to the positions to prevent this from happening.
 
@@ -406,7 +406,7 @@ ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +
   geom_jitter(alpha = 0.2)
 ```
 
-<img src="fig/visualizing-ggplot-rendered-boxplot-jitter-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-boxplot-jitter-1.png" alt="Same bar chart between plot_type (x-axis) and hindfoot_length (y-axis) variables as before, with a scatter plot layer on top for the same variables. Now adding random noise in the x-axis so points don't clutter in the same place." width="600" height="600" style="display: block; margin: auto;" />
 
 Just as before, we can map `plot_type` to `color` by putting it inside `aes()`.
 
@@ -417,7 +417,7 @@ ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length, fi
   geom_jitter(alpha = 0.2)
 ```
 
-<img src="fig/visualizing-ggplot-rendered-global-color-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-global-color-1.png" alt="Same bar chart between plot_type (x-axis) and hindfoot_length (y-axis) variables as before, with a scatter plot layer on top, but now each bar has a different color while points have all the same color." width="600" height="600" style="display: block; margin: auto;" />
 
 Notice that both the color of the points and the color of the bar plot lines changed. Any time we specify an `aes()` mapping inside our initial `ggplot()` function, that mapping will apply to all our `geom`s.
 
@@ -430,7 +430,7 @@ ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +
   geom_jitter(mapping = aes(color = plot_type), alpha = 0.2)
 ```
 
-<img src="fig/visualizing-ggplot-rendered-geom-color-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-geom-color-1.png" alt="Same bar chart between plot_type (x-axis) and hindfoot_length (y-axis) variables as before, with a scatter plot layer on top, but now each bar has the same color while points have different colors for each plot_type." width="600" height="600" style="display: block; margin: auto;" />
 
 Now our points are colored according to `plot_type`, but the bars are all the same color. One thing you might notice is that even with `alpha = 0.2`, the points obscure parts of the bars This is because the `geom_point()` layer comes after the `geom_bar()` layer, which means the points are plotted on top of the bars To put the bar plot on top, we switch the order of the layers:
 
@@ -441,7 +441,7 @@ ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +
   geom_bar(stat = "summary", fun = "mean")
 ```
 
-<img src="fig/visualizing-ggplot-rendered-reverse-layers-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-reverse-layers-1.png" alt="Same bar chart as before, but now the bars are on top of the points of the scatter plot" width="600" height="600" style="display: block; margin: auto;" />
 
 Now we have the opposite problem! The white `fill` of the bar plot completely obscures some of the points. To address this problem, we can remove the `fill` from the bar plot altogether, leaving only the black lines. To do this, we set `fill` to `NA`:
 
@@ -452,7 +452,7 @@ ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +
   geom_bar(stat = "summary", fun = "mean", color = "black", fill = NA)
 ```
 
-<img src="fig/visualizing-ggplot-rendered-fill-na-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-fill-na-1.png" alt="Same bar chart as before, but now boxes are transparent and only have black line as a border." width="600" height="600" style="display: block; margin: auto;" />
 
 Now we can see all the raw data and our bar charts on top.
 
@@ -468,7 +468,7 @@ ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length, fi
   stat_summary(fun.data = "mean_se", geom = "errorbar", width = 0.2) 
 ```
 
-<img src="fig/visualizing-ggplot-rendered-error-bars-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-error-bars-1.png" alt="Bar chart using the plot_type (x-axis) and hindfoot_length (y-axis) variables, showing the average hindfoot_length by plot_type. Now adding error bars for each plot_type." width="600" height="600" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
@@ -489,7 +489,7 @@ ggplot(data = complete_old,
   geom_violin()
 ```
 
-<img src="fig/visualizing-ggplot-rendered-violin-challenge-answer-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-violin-challenge-answer-1.png" alt="Violin plot on top of a jittered scatter plot showing the distribution of data between the plot_type (x-axis) and hindfoot_length (y-axis) variables." width="600" height="600" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::
 
@@ -507,7 +507,7 @@ ggplot(data = complete_old,
   geom_violin( fill = "white", mapping = aes(color = plot_type))
 ```
 
-<img src="fig/visualizing-ggplot-rendered-violin-challenge-answer-2-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-violin-challenge-answer-2-1.png" alt="Violin plot on top of a jittered scatter plot showing the distribution of data between the plot_type (x-axis) and hindfoot_length (y-axis) variables. Data has different colors according to plot_type." width="600" height="600" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -529,17 +529,7 @@ myplot <- ggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_
 myplot
 ```
 
-``` warning
-Warning: Removed 2733 rows containing non-finite outside the scale range
-(`stat_summary()`).
-```
-
-``` warning
-Warning: Removed 2733 rows containing missing values or values outside the scale range
-(`geom_point()`).
-```
-
-<img src="fig/visualizing-ggplot-rendered-unnamed-chunk-1-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-unnamed-chunk-1-1.png" alt="Bar plot with border but with fill transparent on top of a jittered scatter plot between plot_type (x-axis) and hindfoot_length (y-axis), and each point for the scatter plot is color according to plot_type." width="600" height="600" style="display: block; margin: auto;" />
 
 This process of assigning something to an **object** is not specific to `ggplot2`, but rather a general feature of R. We will be using it a lot in the rest of this lesson. We can now work with the `myplot` object as if it was a block of `ggplot2` code, which means we can use `+` to add new components to it.
 
@@ -550,7 +540,7 @@ We can change the overall appearance using `theme_` functions. Let's try a black
 myplot + theme_bw()
 ```
 
-<img src="fig/visualizing-ggplot-rendered-theme-bw-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-theme-bw-1.png" alt="Same plot as before, but now changing the theme to have a white background." width="600" height="600" style="display: block; margin: auto;" />
 
 As you can see, a number of parts of the plot have changed. `theme_` functions usually control many aspects of a plot's appearance all at once, for the sake of convenience. To individually change parts of a plot, we can use the `theme()` function, which can take many different arguments to change things about the text, grid lines, background color, and more. Let's try changing the size of the text on our axis titles. We can do this by specifying that the `axis.title` should be an `element_text()` with `size` set to 14.
 
@@ -561,7 +551,7 @@ myplot +
   theme(axis.title = element_text(size = 14))
 ```
 
-<img src="fig/visualizing-ggplot-rendered-text-size-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-text-size-1.png" alt="Same plot as before, but now setting the axes titles size to 14, making them bigger." width="600" height="600" style="display: block; margin: auto;" />
 
 Another change we might want to make is to remove the vertical grid lines. Since our x axis is categorical, those grid lines aren't useful. To do this, inside `theme()`, we will change the `panel.grid.major.x` to an `element_blank()`.
 
@@ -573,7 +563,7 @@ myplot +
         panel.grid.major.x = element_blank())
 ```
 
-<img src="fig/visualizing-ggplot-rendered-element-blank-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-element-blank-1.png" alt="Same plot as before, but now without grid lines for the x axis." width="600" height="600" style="display: block; margin: auto;" />
 
 Another useful change might be to remove the color legend, since that information is already on our x axis. For this one, we will set `legend.position` to "none". 
 
@@ -586,7 +576,7 @@ myplot +
         legend.position = "none")
 ```
 
-<img src="fig/visualizing-ggplot-rendered-legend-remove-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-legend-remove-1.png" alt="Same plot as before, but without a legend." width="600" height="600" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::::: callout
 
@@ -633,7 +623,7 @@ myplot +
        y = "Hindfoot length (mm)")
 ```
 
-<img src="fig/visualizing-ggplot-rendered-labels-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-labels-1.png" alt="Same plot as before, but now adding a title and more descriptive labels for the axes." width="600" height="600" style="display: block; margin: auto;" />
 
 We removed our legend from this plot, but you can also change the titles of various legends using `labs()`. For example, `labs(color = "Plot type")` would change the title of a color scale legend to "Plot type".
 
@@ -659,7 +649,7 @@ myplot +
        y = "Hindfoot length (mm)")
 ```
 
-<img src="fig/visualizing-ggplot-rendered-customizing-challenge-answer-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-customizing-challenge-answer-1.png" alt="Same plot as before, but now adding a title, a subtitle, and more descriptive labels for the axes." width="600" height="600" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -686,7 +676,7 @@ myplot +
   facet_wrap(vars(sex), ncol = 1)
 ```
 
-<img src="fig/visualizing-ggplot-rendered-facet-wrap-1.png" width="600" height="600" style="display: block; margin: auto;" />
+<img src="fig/visualizing-ggplot-rendered-facet-wrap-1.png" alt="Same plot as before, but now including facets (also called subplots) for each sex." width="600" height="600" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::::: callout
 
