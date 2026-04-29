@@ -23,7 +23,7 @@ exercises: 0
 
 R refers to a programming language as well as the software that runs R code.
 
-[RStudio](https://rstudio.com) is a software interface that can make it easier to write R scripts and interact with the R software. It's a very popular platform, and RStudio also maintains the [`tidyverse`](https://www.tidyverse.org/) series of packages we will use in this lesson.
+[RStudio](https://rstudio.com) is a software interface that can make it easier to write R scripts and interact with the R software. It's a very popular platform, and RStudio also maintains the [tidyverse](https://www.tidyverse.org/) series of packages we will use in this lesson.
 
 ## Why learn R?
 
