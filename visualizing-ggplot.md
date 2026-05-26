@@ -177,7 +177,8 @@ ggplot(data = complete_old, mapping = aes(x = weight, y = hindfoot_length)) +
 ```
 
 ``` error
-Error in geom_poit(): could not find function "geom_poit"
+Error in `geom_poit()`:
+! could not find function "geom_poit"
 ```
 
 As you can see, we only get the error message, with no plot, because something has actually gone wrong. This particular error message is fairly common, and it happened because we misspelled `point` as `poit`. Because there is no function named `geom_poit()`, R tells us it can't find a function with that name.
